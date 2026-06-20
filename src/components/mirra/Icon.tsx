@@ -18,17 +18,40 @@ const SF_TO_SVG: Record<string, keyof typeof IconSvg> = {
   'line.3.horizontal.decrease': 'settings',
   'chevron.left': 'arrowleft',
   ellipsis: 'dotsv',
-  'chevron.right': 'arrowupright',
+  'chevron.right': 'chevronright',
   'arrow.up.right': 'arrowupright',
-  'mic.fill': 'mic',
   sparkles: 'sparkle',
   'checkmark.seal.fill': 'verified',
-  'mappin.and.ellipse': 'gps',
   'person.2.fill': 'users',
   'bubble.left.fill': 'conversations',
   'square.grid.2x2.fill': 'fourSquares',
   'map.fill': 'map',
   'check.double': 'checkdouble',
+  // Exact Figma vectors
+  'm.circle.fill': 'mirra',
+  'mappin.and.ellipse': 'gps2',
+  'location.north.fill': 'navigation',
+  'person.badge.plus': 'userplus',
+  'paperplane.fill': 'paperplane',
+  'paperplane.fill.small': 'paperplane2',
+  'person.crop.circle.badge.checkmark': 'usercheck',
+  xmark: 'cross',
+  'doc.on.doc': 'copy',
+  'bell.fill': 'bell',
+  pencil: 'pencil',
+  'slider.horizontal.3': 'settings2',
+  'line.3.vertical': 'threelines',
+  'line.3.horizontal': 'filter',
+  'arrow.up.arrow.down': 'sortdown',
+  'rectangle.on.rectangle': 'cards',
+  asterisk: 'asterisk',
+  link: 'link',
+  eye: 'eye',
+  'square.and.arrow.up': 'share2',
+  'play.fill': 'play',
+  'arrow.up': 'arrowup',
+  'mic.fill': 'micfill',
+  'sparkle.fill': 'sparklesmall',
 };
 
 const fallback: Record<string, string> = {
@@ -47,7 +70,7 @@ export function Icon({
   color = Colors.text,
   style,
 }: {
-  name: SymbolViewProps['name'] | 'check.double';
+  name: SymbolViewProps['name'] | 'check.double' | 'sparkle.fill' | 'line.3.vertical' | 'paperplane.fill.small';
   size?: number;
   color?: ColorValue;
   style?: SymbolViewProps['style'];

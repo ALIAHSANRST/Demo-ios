@@ -101,4 +101,18 @@ export const Type = {
   blockLabel: { fontFamily: Font.regular, fontSize: 10, lineHeight: 12, letterSpacing: -0.08 },
   micro: { fontFamily: Font.medium, fontSize: 10, lineHeight: 12 },
   microSemi: { fontFamily: Font.semibold, fontSize: 10, lineHeight: 12 },
+
+  // ---- Exact styles added during pixel-perfect pass ----
+  // Stat unit labels "Connections" / "Followers" (Switzer Medium 10/14)
+  statLabel: { fontFamily: Font.medium, fontSize: 10, lineHeight: 14 },
+  // Location pill text (Switzer Semibold 14/18, no tracking)
+  loc: { fontFamily: Font.semibold, fontSize: 14, lineHeight: 18 },
+  // Pill/CTA button label (Switzer Regular 14/18 ls-0.25) — Train AI Chat, View Profile, etc.
+  btn: { fontFamily: Font.regular, fontSize: 14, lineHeight: 18, letterSpacing: -0.25 },
+  // Small button label (Switzer Regular 12/12) — Connect / DM
+  btnSm: { fontFamily: Font.regular, fontSize: 12, lineHeight: 12 },
+  // Big stat number (Switzer Medium 20/28) — profile insights
+  statNum: { fontFamily: Font.medium, fontSize: 20, lineHeight: 28 },
+  // DP hero title (Switzer Semibold 32/36 ls-1)
+  hero: { fontFamily: Font.semibold, fontSize: 32, lineHeight: 36, letterSpacing: -1 },
 } as const;

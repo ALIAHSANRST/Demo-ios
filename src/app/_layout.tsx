@@ -47,6 +47,7 @@ export default function RootLayout() {
       <Stack screenOptions={{ headerShown: false, contentStyle: { backgroundColor: Colors.bg } }}>
         <Stack.Screen name="(tabs)" />
         <Stack.Screen name="chat" options={{ presentation: 'card', animation: 'slide_from_right' }} />
+        <Stack.Screen name="dp-chat" options={{ presentation: 'transparentModal', animation: 'slide_from_bottom' }} />
       </Stack>
     </ThemeProvider>
   );

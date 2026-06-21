@@ -1,12 +1,12 @@
-import { Image } from 'expo-image';
-import { View, StyleSheet, Pressable } from 'react-native';
+import { Image } from "expo-image";
+import { Pressable, StyleSheet, View } from "react-native";
 
-import { Icon } from './Icon';
-import { Txt } from './Txt';
-import { VerifiedBadge } from './VerifiedBadge';
-import type { Conversation } from '@/data/messages-list';
-import { Img } from '@/theme/images';
-import { Colors, Radius, Space } from '@/theme/mirra';
+import type { Conversation } from "@/data/messages-list";
+import { Img } from "@/theme/images";
+import { Colors, Radius, Space } from "@/theme/mirra";
+import { Icon } from "./Icon";
+import { Txt } from "./Txt";
+import { VerifiedBadge } from "./VerifiedBadge";
 
 function UnreadBadge() {
   return (
@@ -28,11 +28,62 @@ function TypingDots() {
   );
 }
 
-export function ConversationRow({ item, onPress }: { item: Conversation; onPress?: () => void }) {
-  if (item.kind === 'group') {
+export function ConversationRow({
+  item,
+  onPress,
+}: {
+  item: Conversation;
+  onPress?: () => void;
+}) {
+  if (item.kind === "group") {
     return (
-      <Pressable style={styles.row} onPress={onPress}>
-        <Image source={Img[item.avatar]} style={styles.groupAvatar} contentFit="cover" />
+      <Pressable style={[styles.row]} onPress={onPress}>
+        {item.multiple ? (
+          <View
+            style={{
+              width: 72,
+              height: 108,
+            }}
+          >
+            <Image
+              source={Img[item.avatar]}
+              style={[
+                {
+                  borderRadius: Radius.sm,
+                  backgroundColor: Colors.surface,
+                  width: 72 * 0.67,
+                  height: 108 * 0.67,
+                  alignSelf: "flex-start",
+                  position: "absolute",
+                  top: 108 * 0.33,
+                  left: 72 * 0.33,
+                  zIndex: 1,
+                },
+              ]}
+              contentFit="cover"
+            />
+            <Image
+              source={Img[item.avatar]}
+              style={[
+                {
+                  borderRadius: Radius.sm,
+                  backgroundColor: Colors.surface,
+                  width: 72 * 0.67,
+                  height: 108 * 0.67,
+                  alignSelf: "flex-start",
+                },
+              ]}
+              contentFit="cover"
+            />
+          </View>
+        ) : (
+          <Image
+            source={Img[item.avatar]}
+            style={styles.groupAvatar}
+            contentFit="cover"
+          />
+        )}
+
         <View style={styles.body}>
           <View style={styles.nameRow}>
             <View style={styles.nameInner}>
@@ -46,13 +97,24 @@ export function ConversationRow({ item, onPress }: { item: Conversation; onPress
             </Txt>
           </View>
           <View style={styles.previewRow}>
-            <Txt variant="body" color={Colors.text80} style={{ fontFamily: 'Switzer-Semibold' }}>
-              {item.sender}{' '}
+            <Txt
+              variant="body"
+              color={Colors.text80}
+              style={{ fontFamily: "Switzer-Semibold" }}
+            >
+              {item.sender}{" "}
             </Txt>
-            <Txt variant="body" color={Colors.text60} numberOfLines={1} style={{ flex: 1 }}>
+            <Txt
+              variant="body"
+              color={Colors.text60}
+              numberOfLines={1}
+              style={{ flex: 1 }}
+            >
               {item.preview}
             </Txt>
-            {item.seen && <Icon name="check.double" size={14} color={Colors.text40} />}
+            {item.seen && (
+              <Icon name="check.double" size={14} color={Colors.text40} />
+            )}
           </View>
         </View>
       </Pressable>
@@ -61,7 +123,11 @@ export function ConversationRow({ item, onPress }: { item: Conversation; onPress
 
   return (
     <Pressable style={styles.row} onPress={onPress}>
-      <Image source={Img[item.avatar]} style={styles.dmAvatar} contentFit="cover" />
+      <Image
+        source={Img[item.avatar]}
+        style={styles.dmAvatar}
+        contentFit="cover"
+      />
       <View style={styles.body}>
         {/* Name + time */}
         <View style={styles.nameRow}>
@@ -70,13 +136,13 @@ export function ConversationRow({ item, onPress }: { item: Conversation; onPress
               {item.name}
             </Txt>
             {item.verified && <VerifiedBadge size={12} />}
-            {item.isNew && (
+            {/* {item.isNew && (
               <View style={styles.newBadge}>
                 <Txt variant="microSemi" color={Colors.bg} style={{ fontFamily: 'Switzer-Medium' }}>
                   New
                 </Txt>
               </View>
-            )}
+            )} */}
           </View>
           <Txt variant="meta" color={Colors.text60}>
             {item.time}
@@ -85,19 +151,29 @@ export function ConversationRow({ item, onPress }: { item: Conversation; onPress
 
         {/* Preview */}
         <View style={styles.previewRow}>
-          {item.previewVariant === 'typing' ? (
+          {item.previewVariant === "typing" ? (
             <>
-              <TypingDots />
-              <Txt variant="body" color={Colors.text50} numberOfLines={1} style={{ flex: 1 }}>
+              {/* <TypingDots /> */}
+              <Txt
+                variant="body"
+                color={Colors.text50}
+                numberOfLines={1}
+                style={{ flex: 1 }}
+              >
                 {item.preview}
               </Txt>
             </>
           ) : (
-            <Txt variant="body" color={Colors.text60} numberOfLines={1} style={{ flex: 1 }}>
+            <Txt
+              variant="body"
+              color={Colors.text60}
+              numberOfLines={1}
+              style={{ flex: 1 }}
+            >
               {item.preview}
             </Txt>
           )}
-          {item.unread ? <UnreadBadge /> : null}
+          {/* {item.unread ? <UnreadBadge /> : null} */}
         </View>
 
         {/* Chat / DP segment */}
@@ -113,7 +189,7 @@ export function ConversationRow({ item, onPress }: { item: Conversation; onPress
             </View>
           </Pressable>
           <Pressable style={styles.segBtn}>
-            <Icon name="sparkles" size={13} color={Colors.lime} />
+            <Icon name="sparkles" size={13} color={Colors.text} />
             <Txt variant="micro" color={Colors.text50}>
               {item.dpName}
             </Txt>
@@ -123,7 +199,7 @@ export function ConversationRow({ item, onPress }: { item: Conversation; onPress
         {/* Location */}
         {item.location && (
           <View style={styles.locRow}>
-            <Icon name="mappin.and.ellipse" size={12} color={Colors.lime} />
+            <Icon name="mappin.and.ellipse" size={12} color={Colors.text} />
             <Txt variant="metaMedium" color={Colors.text60}>
               {item.location}
             </Txt>
@@ -135,48 +211,74 @@ export function ConversationRow({ item, onPress }: { item: Conversation; onPress
 }
 
 const styles = StyleSheet.create({
-  row: { flexDirection: 'row', gap: Space.m, paddingVertical: Space.s, alignItems: 'stretch' },
-  dmAvatar: { width: 72, height: 108, borderRadius: Radius.lg, backgroundColor: Colors.surface },
-  groupAvatar: { width: 56, height: 56, borderRadius: Radius.lg, backgroundColor: Colors.surface, alignSelf: 'center' },
-  body: { flex: 1, justifyContent: 'center', gap: 6 },
+  row: {
+    flexDirection: "row",
+    gap: Space.m,
+    paddingVertical: Space.s,
+    alignItems: "stretch",
+  },
+  dmAvatar: {
+    width: 72,
+    height: 108,
+    borderRadius: Radius.lg,
+    backgroundColor: Colors.surface,
+  },
+  groupAvatar: {
+    width: 72,
+    height: 72,
+    borderRadius: Radius.lg,
+    backgroundColor: Colors.surface,
+    alignSelf: "center",
+  },
+  body: { flex: 1, justifyContent: "center", gap: 6 },
 
-  nameRow: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', gap: Space.s },
-  nameInner: { flexDirection: 'row', alignItems: 'center', gap: 5, flex: 1 },
-  newBadge: { backgroundColor: Colors.lime, borderRadius: Radius.xxl, paddingHorizontal: 8, paddingVertical: 2 },
+  nameRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    gap: Space.s,
+  },
+  nameInner: { flexDirection: "row", alignItems: "center", gap: 5, flex: 1 },
+  newBadge: {
+    backgroundColor: Colors.lime,
+    borderRadius: Radius.xxl,
+    paddingHorizontal: 8,
+    paddingVertical: 2,
+  },
 
-  previewRow: { flexDirection: 'row', alignItems: 'center', gap: 6 },
+  previewRow: { flexDirection: "row", alignItems: "center", gap: 6 },
   unread: {
     minWidth: 16,
     height: 16,
     paddingHorizontal: 4,
     borderRadius: 8,
     backgroundColor: Colors.lime,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
   },
-  typingDots: { flexDirection: 'row', gap: 3, alignItems: 'center' },
+  typingDots: { flexDirection: "row", gap: 3, alignItems: "center" },
   dot: { width: 5, height: 5, borderRadius: 2.5, backgroundColor: Colors.lime },
 
-  segRow: { flexDirection: 'row', gap: 2, marginTop: 2 },
+  segRow: { flexDirection: "row", gap: 2, marginTop: 2 },
   segBtn: {
     flex: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
     gap: 5,
     height: 28,
     borderRadius: Radius.xs,
   },
-  segActive: { backgroundColor: Colors.glass03 },
+  segActive: { backgroundColor: Colors.glass05 },
   segBadge: {
     minWidth: 16,
     height: 16,
     paddingHorizontal: 4,
     borderRadius: 8,
     backgroundColor: Colors.lime,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
   },
 
-  locRow: { flexDirection: 'row', alignItems: 'center', gap: 4, marginTop: 1 },
+  locRow: { flexDirection: "row", alignItems: "center", gap: 4, marginTop: 1 },
 });

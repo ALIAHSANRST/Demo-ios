@@ -1,9 +1,7 @@
-import { BlurView } from "expo-blur";
 import { Image } from "expo-image";
 import { useRouter } from "expo-router";
 import { useState } from "react";
 import {
-  Platform,
   Pressable,
   ScrollView,
   StyleSheet,
@@ -76,12 +74,7 @@ export default function DpChatScreen() {
           source={Img[dpChat.backdrop]}
           style={StyleSheet.absoluteFill}
           contentFit="cover"
-          blurRadius={Platform.OS === "android" ? 25 : 0}
-        />
-        <BlurView
-          tint="dark"
-          intensity={Platform.OS === "ios" ? 60 : 0}
-          style={StyleSheet.absoluteFill}
+          blurRadius={25}
         />
         <View style={styles.scrim} />
 
@@ -196,6 +189,7 @@ const styles = StyleSheet.create({
     right: -120,
     height: 360,
     opacity: 0.5,
+    filter: "blur(40px)",
   },
   grabber: {
     position: "absolute",

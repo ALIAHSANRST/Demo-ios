@@ -23,6 +23,7 @@ const SF_TO_SVG: Record<string, keyof typeof IconSvg> = {
   sparkles: "sparkle",
   "checkmark.seal.fill": "verified",
   "person.2.fill": "users",
+  filterFunnel: "filterFunnel",
   "bubble.left.fill": "conversations",
   "square.grid.2x2.fill": "fourSquares",
   "map.fill": "map",
@@ -52,6 +53,15 @@ const SF_TO_SVG: Record<string, keyof typeof IconSvg> = {
   "arrow.up": "arrowup",
   "mic.fill": "micfill",
   "sparkle.fill": "sparklesmall",
+  filterSortDown: "filterSortDown",
+  dpEmojiHappy: "dpEmojiHappy",
+  personRequestDone: "personRequestDone",
+  mapPointIcon: "mapPointIcon",
+  listToggleIcon: "listToggleIcon",
+  gridToggleIcon: "gridToggleIcon",
+  userPlusOutlineIcon: "userPlusOutlineIcon",
+  savedContactsOutlineIcon: "savedContactsOutlineIcon",
+  mapPinOutlineIcon: "mapPinOutlineIcon",
 };
 
 const fallback: Record<string, string> = {
@@ -75,7 +85,17 @@ export function Icon({
     | "check.double"
     | "sparkle.fill"
     | "line.3.vertical"
-    | "paperplane.fill.small";
+    | "paperplane.fill.small"
+    | "filterFunnel"
+    | "dpEmojiHappy"
+    | "personRequestDone"
+    | "filterSortDown"
+    | "mapPointIcon"
+    | "listToggleIcon"
+    | "gridToggleIcon"
+    | "userPlusOutlineIcon"
+    | "mapPinOutlineIcon"
+    | "savedContactsOutlineIcon";
   size?: number;
   color?: ColorValue;
   style?: SymbolViewProps["style"];

@@ -5,7 +5,6 @@ import { Pressable, ScrollView, StyleSheet, View } from "react-native";
 import type { Block, Contact } from "@/data/contacts";
 import { Img } from "@/theme/images";
 import { Colors, Radius, Space } from "@/theme/mirra";
-import { GradientBorder } from "./GradientBorder";
 import { Icon } from "./Icon";
 import { Txt } from "./Txt";
 import { VerifiedBadge } from "./VerifiedBadge";
@@ -67,28 +66,30 @@ export function ContactCard({ contact }: { contact: Contact }) {
         />
 
         <View style={styles.info}>
-          <View style={styles.nameRow}>
-            <View style={styles.nameInner}>
-              <Txt variant="cardName" color={Colors.text} numberOfLines={1}>
-                {contact.name}
-              </Txt>
-              {contact.verified && <VerifiedBadge size={15} />}
+          <View>
+            <View style={styles.nameRow}>
+              <View style={styles.nameInner}>
+                <Txt variant="cardName" color={Colors.text} numberOfLines={1}>
+                  {contact.name}
+                </Txt>
+                {contact.verified && <VerifiedBadge size={15} />}
+              </View>
+              <Pressable hitSlop={8} style={styles.menuBtn}>
+                <Icon name="ellipsis" size={16} color={Colors.text60} />
+              </Pressable>
             </View>
-            <Pressable hitSlop={8} style={styles.menuBtn}>
-              <Icon name="ellipsis" size={16} color={Colors.text60} />
-            </Pressable>
-          </View>
 
-          <Txt variant="metaMedium" color={Colors.text60} numberOfLines={1}>
-            {contact.title}
-          </Txt>
+            <Txt variant="metaMedium" color={Colors.text60} numberOfLines={1}>
+              {contact.title}
+            </Txt>
+          </View>
 
           <View style={styles.btnRow}>
             <Pressable
               style={styles.dmBtn}
               onPress={() => router.push("/chat")}
             >
-              <Icon name="bubble.left.fill" size={14} color={Colors.text80} />
+              <Icon name="paperplane.fill" size={14} color={Colors.text80} />
               <Txt variant="meta" color={Colors.text80}>
                 DM
               </Txt>
@@ -97,9 +98,16 @@ export function ContactCard({ contact }: { contact: Contact }) {
               style={styles.chatBtn}
               onPress={() => router.push("/dp-chat")}
             >
+              <Icon name="dpEmojiHappy" size={18} color={Colors.text80} />
               <Txt variant="metaSemi" color={Colors.text80}>
                 Chat with DP
               </Txt>
+            </Pressable>
+            <Pressable
+              style={styles.requestBtn}
+              onPress={() => router.push("/chat")}
+            >
+              <Icon name="personRequestDone" size={18} color={Colors.text80} />
             </Pressable>
           </View>
 
@@ -115,7 +123,7 @@ export function ContactCard({ contact }: { contact: Contact }) {
       </View>
 
       <View style={styles.commonSection}>
-        <View style={styles.commonHeader}>
+        {/* <View style={styles.commonHeader}>
           <Icon name="check.double" size={13} color={Colors.lime} />
 
           <View style={styles.commonBadge}>
@@ -123,12 +131,13 @@ export function ContactCard({ contact }: { contact: Contact }) {
               {contact.inCommon}
             </Txt>
           </View>
-        </View>
+        </View> */}
 
         <ScrollView
           horizontal
           showsHorizontalScrollIndicator={false}
           contentContainerStyle={styles.blocksRow}
+          style={{ marginTop: Space.m }}
         >
           {contact.blocks.map((b, i) => (
             <CommonBlock key={i} block={b} />
@@ -136,7 +145,7 @@ export function ContactCard({ contact }: { contact: Contact }) {
         </ScrollView>
       </View>
 
-      <GradientBorder radius={Radius.xxl} strokeWidth={1} />
+      {/* <GradientBorder radius={Radius.xxl} strokeWidth={1} /> */}
     </View>
   );
 }
@@ -146,7 +155,7 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.glass05,
     borderRadius: Radius.xxl,
     borderWidth: 1,
-    borderColor: Colors.borderSoft,
+    // borderColor: Colors.borderSoft,
     overflow: "hidden",
   },
   topRow: {
@@ -154,10 +163,11 @@ const styles = StyleSheet.create({
     gap: Space.m,
     padding: 0,
     paddingRight: Space.l,
+    backgroundColor: Colors.glass02,
   },
   photo: {
-    width: 112,
-    height: 152,
+    width: 100,
+    height: 164,
     borderRadius: Radius.lg,
     backgroundColor: Colors.surface,
   },
@@ -171,10 +181,10 @@ const styles = StyleSheet.create({
   menuBtn: {
     width: 28,
     height: 28,
-    borderRadius: Radius.sm,
+    // borderRadius: Radius.sm,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: Colors.glass05,
+    // backgroundColor: Colors.glass05,
   },
 
   btnRow: { flexDirection: "row", gap: Space.s, marginTop: 4 },
@@ -185,17 +195,26 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.glass05,
     borderWidth: StyleSheet.hairlineWidth,
     borderColor: Colors.borderSoft,
-    paddingHorizontal: Space.l,
+    paddingHorizontal: Space.m,
     height: 36,
     borderRadius: Radius.sm,
   },
+  requestBtn: {
+    flexDirection: "row",
+    alignItems: "center",
+    paddingHorizontal: Space.s,
+    height: 36,
+  },
   chatBtn: {
     flex: 1,
+    flexDirection: "row",
+    gap: 6,
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: Colors.glass05,
     height: 36,
     borderRadius: Radius.xs,
+    paddingHorizontal: Space.m,
   },
   visitBtn: {
     alignItems: "center",
@@ -206,6 +225,7 @@ const styles = StyleSheet.create({
     height: 36,
     borderRadius: Radius.sm,
     marginTop: 2,
+    marginBottom: Space.m,
   },
 
   commonSection: { paddingVertical: Space.m, gap: Space.s },

@@ -26,7 +26,11 @@ function Header() {
       </View>
       <View style={styles.headerActions}>
         <Pressable style={styles.sqBtn}>
+          <View style={styles.searchGlow} />
           <Icon name="magnifyingglass" size={18} color={Colors.text} />
+          <View style={styles.searchSparkle}>
+            <Icon name="sparkle.fill" size={9} color={Colors.text} />
+          </View>
           <GradientBorder radius={Radius.lg} strokeWidth={1} />
         </Pressable>
         <Pressable style={[styles.sqBtn, styles.sqBtnOutline]}>
@@ -264,6 +268,17 @@ export default function ContactsScreen() {
 }
 
 const styles = StyleSheet.create({
+  searchGlow: {
+    position: "absolute",
+    bottom: -22,
+    alignSelf: "center",
+    width: 30,
+    height: 22,
+    borderRadius: 16,
+    // backgroundColor: "#1d4afe",
+    boxShadow: "0px 0px 12px 2px rgba(29,74,254,0.9)",
+  },
+  searchSparkle: { position: "absolute", top: 4, right: 5 },
   screen: { flex: 1, backgroundColor: Colors.bg, paddingHorizontal: Space.l },
   header: {
     flexDirection: "row",
@@ -289,8 +304,11 @@ const styles = StyleSheet.create({
     height: 44,
     borderRadius: Radius.lg,
     backgroundColor: Colors.glass05,
+    borderWidth: StyleSheet.hairlineWidth,
+    borderColor: Colors.borderSoft,
     alignItems: "center",
     justifyContent: "center",
+    overflow: "hidden",
   },
   sqBtnOutline: {
     borderWidth: StyleSheet.hairlineWidth,

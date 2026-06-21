@@ -13,12 +13,35 @@ function IconChips({ icons, more }: { icons: string[]; more?: number }) {
   return (
     <View style={styles.chipRow}>
       {icons.map((ic, i) => (
-        <View key={i} style={styles.chip}>
+        <View
+          key={i}
+          style={[
+            styles.chip,
+            {
+              transform: [{ rotate: i % 2 === 0 ? "-10deg" : "10deg" }],
+              left: i * -8,
+              boxShadow: `0px 0px 4px rgba(255, 255, 255, 0.1)`,
+              zIndex: i * 2,
+            },
+          ]}
+        >
           <Txt style={{ fontSize: 18 }}>{ic}</Txt>
         </View>
       ))}
       {more ? (
-        <View style={styles.chip}>
+        <View
+          style={[
+            styles.chip,
+            {
+              left: icons.length * -8,
+              transform: [
+                { rotate: icons.length % 2 === 0 ? "-10deg" : "10deg" },
+              ],
+              zIndex: icons.length * 2,
+              boxShadow: `0px 0px 4px rgba(255, 255, 255, 0.1)`,
+            },
+          ]}
+        >
           <Txt
             variant="bodyMedium"
             color={Colors.text80}
@@ -40,8 +63,20 @@ function CommonBlock({ block }: { block: Block }) {
       </Txt>
       {block.kind === "text" ? (
         <View style={styles.textPill}>
+          <View
+            style={{
+              position: "absolute",
+              top: 8,
+              left: 8,
+              width: 3,
+              height: 3,
+              borderRadius: Radius.lg,
+              backgroundColor: Colors.lime,
+              boxShadow: "0px 0px 6px 1px rgba(225, 255, 79, 0.88)",
+            }}
+          />
           {block.icon && (
-            <Icon name={block.icon as any} size={13} color={Colors.lime} />
+            <Icon name={block.icon as any} size={12} color={Colors.lime} />
           )}
           <Txt variant="metaMedium" color={Colors.text60} numberOfLines={1}>
             {block.value}
@@ -251,17 +286,17 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     gap: 4,
-    height: 40,
+    height: 46,
     paddingHorizontal: Space.m,
     borderRadius: Radius.sm,
     backgroundColor: Colors.glass05,
   },
-  chipRow: { flexDirection: "row", gap: 4 },
+  chipRow: { flexDirection: "row", gap: 4, paddingVertical: 3 },
   chip: {
     width: 40,
     height: 40,
     borderRadius: Radius.sm,
-    backgroundColor: Colors.glass05,
+    backgroundColor: "rgb(40,40,40,0.8)",
     alignItems: "center",
     justifyContent: "center",
   },

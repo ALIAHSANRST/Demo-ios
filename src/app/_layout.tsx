@@ -1,10 +1,10 @@
-import { useFonts } from 'expo-font';
-import { Stack, ThemeProvider } from 'expo-router';
-import { StatusBar } from 'expo-status-bar';
-import { useEffect } from 'react';
-import * as SplashScreen from 'expo-splash-screen';
+import { useFonts } from "expo-font";
+import { Stack, ThemeProvider } from "expo-router";
+import * as SplashScreen from "expo-splash-screen";
+import { StatusBar } from "expo-status-bar";
+import { useEffect } from "react";
 
-import { Colors, Font } from '@/theme/mirra';
+import { Colors, Font } from "@/theme/mirra";
 
 SplashScreen.preventAutoHideAsync().catch(() => {});
 
@@ -20,19 +20,19 @@ const MirraNavTheme = {
     notification: Colors.red,
   },
   fonts: {
-    regular: { fontFamily: Font.regular, fontWeight: '400' as const },
-    medium: { fontFamily: Font.medium, fontWeight: '500' as const },
-    bold: { fontFamily: Font.semibold, fontWeight: '600' as const },
-    heavy: { fontFamily: Font.semibold, fontWeight: '700' as const },
+    regular: { fontFamily: Font.regular, fontWeight: "400" as const },
+    medium: { fontFamily: Font.medium, fontWeight: "500" as const },
+    bold: { fontFamily: Font.semibold, fontWeight: "600" as const },
+    heavy: { fontFamily: Font.semibold, fontWeight: "700" as const },
   },
 };
 
 export default function RootLayout() {
   const [loaded] = useFonts({
-    'Switzer-Regular': require('@/assets/fonts/Switzer-Regular.ttf'),
-    'Switzer-Medium': require('@/assets/fonts/Switzer-Medium.ttf'),
-    'Switzer-Semibold': require('@/assets/fonts/Switzer-Semibold.ttf'),
-    'Switzer-Bold': require('@/assets/fonts/Switzer-Bold.ttf'),
+    "Switzer-Regular": require("@/assets/fonts/Switzer-Regular.ttf"),
+    "Switzer-Medium": require("@/assets/fonts/Switzer-Medium.ttf"),
+    "Switzer-Semibold": require("@/assets/fonts/Switzer-Semibold.ttf"),
+    "Switzer-Bold": require("@/assets/fonts/Switzer-Bold.ttf"),
   });
 
   useEffect(() => {
@@ -44,10 +44,18 @@ export default function RootLayout() {
   return (
     <ThemeProvider value={MirraNavTheme}>
       <StatusBar style="light" />
-      <Stack screenOptions={{ headerShown: false, contentStyle: { backgroundColor: Colors.bg } }}>
+      <Stack
+        screenOptions={{
+          headerShown: false,
+          contentStyle: { backgroundColor: Colors.bg },
+        }}
+      >
         <Stack.Screen name="(tabs)" />
-        <Stack.Screen name="chat" options={{ presentation: 'card', animation: 'slide_from_right' }} />
-        <Stack.Screen name="dp-chat" options={{ presentation: 'transparentModal', animation: 'slide_from_bottom' }} />
+        <Stack.Screen name="chat" />
+        <Stack.Screen
+          name="dp-chat"
+          options={{ contentStyle: { backgroundColor: "transparent" } }}
+        />
       </Stack>
     </ThemeProvider>
   );

@@ -11,6 +11,12 @@ import { categories, categoryIcons, contacts } from "@/data/contacts";
 import { Img } from "@/theme/images";
 import { Colors, Radius, Space } from "@/theme/mirra";
 
+const EMOJIS = {
+  tennis: require("@/assets/mirra/emojis/tennis-emoji.png"),
+  golf: require("@/assets/mirra/emojis/golf-emoji.png"),
+  travel: require("@/assets/mirra/emojis/travel-emoji.png"),
+};
+
 function Header() {
   return (
     <View style={styles.header}>
@@ -184,7 +190,16 @@ export default function ContactsScreen() {
           >
             {categories.map((cat) => (
               <Pressable key={cat} style={styles.catTab}>
-                <Txt style={{ fontSize: 14 }}>{categoryIcons[cat]}</Txt>
+                {cat.toLowerCase() === "tennis" ||
+                cat.toLowerCase() === "golf" ||
+                cat.toLowerCase() === "travel" ? (
+                  <Image
+                    source={EMOJIS[cat.toLowerCase() as keyof typeof EMOJIS]}
+                    style={{ width: 22, height: 22 }}
+                  />
+                ) : (
+                  <Txt style={{ fontSize: 14 }}>{categoryIcons[cat]}</Txt>
+                )}
                 <Txt variant="metaSemi" color={Colors.text80}>
                   {cat}
                 </Txt>

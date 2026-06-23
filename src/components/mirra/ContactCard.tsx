@@ -9,6 +9,15 @@ import { Icon } from "./Icon";
 import { Txt } from "./Txt";
 import { VerifiedBadge } from "./VerifiedBadge";
 
+const EMOJIS = {
+  "🎾": require("@/assets/mirra/emojis/tennis-emoji.png"),
+  "⛳": require("@/assets/mirra/emojis/golf-emoji.png"),
+  "✈️": require("@/assets/mirra/emojis/travel-emoji.png"),
+  "🎥": require("@/assets/mirra/emojis/webflow-emoji.png"),
+  "🎬": require("@/assets/mirra/emojis/figma-emoji.png"),
+  "📷": require("@/assets/mirra/emojis/videography-emoji.png"),
+};
+
 function IconChips({ icons, more }: { icons: string[]; more?: number }) {
   return (
     <View style={styles.chipRow}>
@@ -25,7 +34,14 @@ function IconChips({ icons, more }: { icons: string[]; more?: number }) {
             },
           ]}
         >
-          <Txt style={{ fontSize: 18 }}>{ic}</Txt>
+          {EMOJIS[ic as keyof typeof EMOJIS] ? (
+            <Image
+              source={EMOJIS[ic as keyof typeof EMOJIS]}
+              style={{ width: 24, height: 24 }}
+            />
+          ) : (
+            <Txt style={{ fontSize: 18 }}>{ic}</Txt>
+          )}
         </View>
       ))}
       {more ? (
